@@ -1,5 +1,5 @@
 // Vite proxy: /api → https://secrets-api.appbrewery.com (fixes CORS in dev)
-export const API_BASE = '/api';
+export const API_BASE = 'https://secrets-api.appbrewery.com';
 
 /**
  * Central fetch wrapper for all API calls.
