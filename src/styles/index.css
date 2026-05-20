@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --void: #080a0f;
+  --deep: #0d1117;
+  --surface: #161b22;
+  --elevated: #1c2230;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.14);
+  --gold: #c9a84c;
+  --gold-light: #e2c578;
+  --gold-dim: rgba(201,168,76,0.15);
+  --crimson: #a83232;
+  --crimson-light: #c94444;
+  --green: #2d7a4f;
+  --green-light: #3a9e65;
+  --text: #e8e2d5;
+  --text-dim: #8a8070;
+  --text-muted: #4a4540;
+  --shadow-gold: 0 0 40px rgba(201,168,76,0.12);
+  --shadow-deep: 0 8px 48px rgba(0,0,0,0.6);
+  --shadow-card: 0 2px 20px rgba(0,0,0,0.4);
+  --radius: 8px;
+  --radius-sm: 5px;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background: var(--void);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Background texture ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168,50,50,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Layout ── */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.main-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-deep);
+  width: 100%;
+  max-width: 820px;
+  padding: 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ── Forms ── */
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 7px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.93rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+input:focus {
+  border-color: var(--gold);
+  background: var(--void);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.10);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+.row-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.row-form .form-group {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 110px;
+}
+
+/* ── Password field with toggle ── */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 44px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.password-toggle:hover {
+  color: var(--gold);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 22px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all var(--transition);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--transition);
+}
+
+.btn:hover::after {
+  background: rgba(255,255,255,0.06);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e2a3a, #2a3a50);
+  color: var(--text);
+  border: 1px solid var(--border-bright);
+}
+
+.btn-primary:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201,168,76,0.15);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--crimson), var(--crimson-light));
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(168,50,50,0.3);
+}
+
+.btn-accent:hover {
+  box-shadow: 0 4px 24px rgba(168,50,50,0.5);
+  transform: translateY(-1px);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--void);
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(201,168,76,0.25);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--border-bright);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--crimson-light);
+  border: 1px solid rgba(201,68,68,0.3);
+}
+
+.btn-danger:hover {
+  background: rgba(168,50,50,0.1);
+  border-color: var(--crimson-light);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 0.80rem;
+}
+
+/* ── Section label ── */
+.section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.01em;
+}
+
+.section-label .section-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ── Collapsible section ── */
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+
+.collapsible-header:hover .section-title {
+  color: var(--gold);
+}
+
+.collapsible-arrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  transition: transform 0.25s ease;
+}
+
+.collapsible-arrow.open {
+  transform: rotate(180deg);
+}
+
+.collapsible-body {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.25s ease;
+}
+
+.collapsible-body.open {
+  max-height: 600px;
+  opacity: 1;
+  padding-top: 18px;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* ── Action block ── */
+.action-block {
+  margin-bottom: 6px;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+
+.action-block:last-child {
+  margin-bottom: 0;
+}
+
+.blocks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  margin: 32px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Loading dots for buttons ── */
+.btn-loading {
+  pointer-events: none;
+}
+
+.btn-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.btn-dots span {
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+
+.btn-dots span:nth-child(2) { animation-delay: 0.2s; }
+.btn-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Results count badge ── */
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.results-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ── Secrets grid ── */
+.secrets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .main-card {
+    padding: 24px 18px;
+  }
+
+  .secrets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .row-form {
+    flex-direction: column;
+  }
+
+  .row-form .form-group {
+    min-width: unset;
+    width: 100%;
+  }
+}
